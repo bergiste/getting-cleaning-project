@@ -35,4 +35,9 @@ train_set <- data.frame(
 data_set <- rbind(test_set, train_set)
 data_set <- mutate(data_set, activity_name = factor(activity_id, labels = c('WALKING','WALKING_UPSTAIRS','WALKING_DOWNSTAIRS','SITTING','STANDING','LAYING')) )
 
+data_group <- group_by(data_set, subject,activity_name)
+
+summary <- summarize(data_group, average = mean(activity_measure))
+
+write.table(summary, 'summary.txt', row.names = F)
 
